@@ -20,7 +20,7 @@ class _MyAppState extends State<MyApp> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   bool _isBuzzerActive = false;
   int startTime = 0;
-  final String userId = "Team2"; // Using Team1
+  final String userId = "Team1"; // Using Team1
   String lastUID =
       "null"; // Properly naming the variable instead of ColorChanging
 
@@ -48,10 +48,9 @@ class _MyAppState extends State<MyApp> {
   Future<void> updateBuzzerStatus(int endTime) async {
     await _firestore.collection('buzzer_data').doc('data').update({
       'onPressed': true,
-      'lastUID': "Team2", // This will now store 'Team1'
-      'endTeam2': endTime, // Storing endTime for Team1
+      'lastUID': "Team1", // This will now store 'Team1'
+      'endTeam1': endTime, // Storing endTime for Team1
     });
-    Future.delayed(Duration(milliseconds: 5));
   }
 
   @override
@@ -67,7 +66,7 @@ class _MyAppState extends State<MyApp> {
               colors: [
                 Colors.black,
                 const Color.fromRGBO(31, 31, 31, 1),
-                _isBuzzerActive && lastUID == "Team2"
+                _isBuzzerActive && lastUID == userId
                     ? Colors
                         .red // Set the background to red if this team pressed
                     : _isBuzzerActive
@@ -87,7 +86,7 @@ class _MyAppState extends State<MyApp> {
                 ),
                 SizedBox(height: MediaQuery.sizeOf(context).height * 0.06),
                 Text(
-                  "Team 2", // Displaying the team name
+                  "Team 1", // Displaying the team name
                   style: TextStyle(
                       color: const Color.fromARGB(255, 137, 134, 134),
                       fontWeight: FontWeight.w900,
